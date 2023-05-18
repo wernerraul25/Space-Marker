@@ -5,8 +5,8 @@ pygame.init()
 
 
 #tamanho tela
-largura = 600
-altura = 400
+largura = 1280
+altura = 720
 tamanho = (largura,altura)
 black = (0,0,0)
 white = (255,255,255)
@@ -14,6 +14,9 @@ white = (255,255,255)
 
 clock = pygame.time.Clock()
 tela = pygame.display.set_mode(tamanho)
+
+#imagens
+fundo = pygame.image.load("fundo.jpg")
 
 #nome e icone
 pygame.display.set_caption("Space Marker")
@@ -43,7 +46,7 @@ while running:
 
 
     #mostra na tela
-    tela.fill(black)
+    tela.blit(fundo, (0,0))
     
     pygame.display.update()
     clock.tick(144)
