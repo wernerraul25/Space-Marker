@@ -11,15 +11,13 @@ tamanho = (largura,altura)
 black = (0,0,0)
 white = (255,255,255)
 
-
-clock = pygame.time.Clock()
-tela = pygame.display.set_mode(tamanho)
-
 #imagens
 fundo = pygame.image.load("fundo.jpg")
 
 #nome e icone
 pygame.display.set_caption("Space Marker")
+clock = pygame.time.Clock()
+tela = pygame.display.set_mode(tamanho)
 
 #variáveis
 running = True
@@ -38,7 +36,7 @@ while running:
             item = simpledialog.askstring("Space", "Nome da Estrela: ")
             print(item)
             if item == None:
-                item = "Desconhecido" + str(pos)
+                item = "Desconhecido"+str(pos)
             estrelas[item] = pos  #arrumar a biblioteca
             print(estrelas)
 
