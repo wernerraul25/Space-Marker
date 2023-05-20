@@ -1,5 +1,5 @@
-# trabalho_espacial
+# Space Marker
  Trabalho do Marcão G2
 
-Aluno: Raul Werner "\n"
+Aluno: Raul Werner
 RA: 1129436
