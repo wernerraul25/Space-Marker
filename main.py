@@ -43,7 +43,7 @@ while running:
                 item = simpledialog.askstring("Space", "Nome da Estrela:")
                 print(item)
                 if item == None:
-                    item = "Desconhecido" + str(posicao)
+                    item = "Desconhecido" + str(posicao)#não funcionando
                 estrelas[item] = posicao
                 print(estrelas)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
