@@ -19,9 +19,15 @@ pygame.display.set_caption("Space Marker")
 clock = pygame.time.Clock()
 tela = pygame.display.set_mode(tamanho)
 
+#fonte
+fonte = pygame.font.Font(None,25)
+
 #variáveis
 running = True
 pos = (0,0)
+pos_diminuir = 30
+
+item = ""
 
 #dicionarios
 estrelas = {}
@@ -37,7 +43,7 @@ while running:
             item = simpledialog.askstring("Space", "Nome da Estrela: ")
             print(item)
             if item == None:
-                item = "Desconhecido"+str(pos)
+                item = "Desconhecido" + str(pos)
             estrelas[item] = pos  #arrumar a biblioteca
             print(estrelas)
 
@@ -46,6 +52,9 @@ while running:
 
     #mostra na tela
     tela.blit(fundo, (0,0))
+    pos_texto = tuple(valor - pos_diminuir for valor in pos)
+    texto_estrela = fonte.render(item,True,white)
+    tela.blit(texto_estrela,(pos_texto))
     pygame.draw.circle(tela, white, (pos), 10)
     
     pygame.display.update()
