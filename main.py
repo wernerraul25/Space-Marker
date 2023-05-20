@@ -21,6 +21,7 @@ tela = pygame.display.set_mode(tamanho)
 
 #variáveis
 running = True
+pos = (0,0)
 
 #dicionarios
 estrelas = {}
@@ -45,6 +46,7 @@ while running:
 
     #mostra na tela
     tela.blit(fundo, (0,0))
+    pygame.draw.circle(tela, white, (pos), 10)
     
     pygame.display.update()
     clock.tick(144)
