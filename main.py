@@ -30,6 +30,7 @@ running = True
 x_y = (0,0)
 pos_diminuir = 25
 item = None
+item_tela = None
 
 #dicionarios
 estrelas = {}
@@ -44,9 +45,10 @@ while running:
                 x_y = pygame.mouse.get_pos()
                 item = simpledialog.askstring("Space", "Nome da Estrela:")
                 if item == "":
-                    item = "Desconhecido" + str(x_y)
+                    item_tela = "Desconhecido" + str(x_y)
+                    item = "Desconhecido"
                 elif item is not None:
-                    item = item + str(x_y)
+                    item_tela = item  + str(x_y)
                 estrelas[item] = x_y
                 print(estrelas)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
@@ -62,7 +64,7 @@ while running:
     pos_texto = tuple(valor - pos_diminuir for valor in x_y) #posição do texto acima da estrela
     
     if item is not None:
-        texto_estrela = fonte_estrela.render(str(item),True,white) #cria o texto da estrela
+        texto_estrela = fonte_estrela.render(str(item_tela),True,white) #cria o texto da estrela
         tela.blit(texto_estrela,pos_texto) #mostra o texto da estrela
     
     pygame.draw.circle(tela, white, (x_y), 5) #circulo
