@@ -13,9 +13,11 @@ white = (255,255,255)
 
 #imagens
 fundo = pygame.image.load("fundo.jpg")
+icone = pygame.image.load("icone.png")
 
 #nome e icone
 pygame.display.set_caption("Space Marker")
+pygame.display.set_icon(icone) #motivo desconhecido não aparece o icone
 clock = pygame.time.Clock()
 tela = pygame.display.set_mode(tamanho)
 
@@ -42,9 +44,11 @@ while running:
                 if event.button == 1:
                     x, y = pygame.mouse.get_pos()
                 item = simpledialog.askstring("Space", "Nome da Estrela:")
-                print(item)
-                if item == None:
-                    item = "Desconhecido" + str(x, y)#não funcionando
+                #print(item)
+                x_str = str(x)
+                y_str = str(y)
+                if item == "":
+                    item = "Desconhecido" + x_str + y_str #não funcionando
                 estrelas[item] = x, y
                 print(estrelas)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
@@ -58,9 +62,11 @@ while running:
     #mostra na tela
     tela.blit(fundo, (0,0)) #fundo
     pos_texto = (x - pos_diminuir, y - pos_diminuir) #posição do texto acima da estrela
+    
     if item is not None:
-        texto_estrela = fonte_estrela.render(item,True,white) #cria o texto da estrela
+        texto_estrela = fonte_estrela.render(str(item),True,white) #cria o texto da estrela
         tela.blit(texto_estrela,pos_texto) #mostra o texto da estrela
+    
     pygame.draw.circle(tela, white, (x, y), 5) #circulo
     
     #mostra os F10,F11,F12
