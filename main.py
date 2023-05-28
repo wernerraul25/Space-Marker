@@ -27,7 +27,7 @@ fonte = pygame.font.Font(None,30)
 
 #variáveis
 running = True
-x, y = (0,0)
+x_y = (0,0)
 pos_diminuir = 25
 item = None
 
@@ -40,16 +40,12 @@ while running:
             running = False
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
-        elif event.type == pygame.MOUSEBUTTONUP:
-                if event.button == 1:
-                    x, y = pygame.mouse.get_pos()
+        elif event.type == pygame.MOUSEBUTTONUP and event.button == 1: #só funciona com botão esquerdo do mouse;)
+                x_y = pygame.mouse.get_pos()
                 item = simpledialog.askstring("Space", "Nome da Estrela:")
-                #print(item)
-                x_str = str(x)
-                y_str = str(y)
                 if item == "":
-                    item = "Desconhecido" + x_str + y_str #não funcionando
-                estrelas[item] = x, y
+                    item = "Desconhecido" + str(x_y)
+                estrelas[item] = x_y
                 print(estrelas)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
             running = False
@@ -61,13 +57,13 @@ while running:
 
     #mostra na tela
     tela.blit(fundo, (0,0)) #fundo
-    pos_texto = (x - pos_diminuir, y - pos_diminuir) #posição do texto acima da estrela
+    pos_texto = tuple(valor - pos_diminuir for valor in x_y) #posição do texto acima da estrela
     
     if item is not None:
         texto_estrela = fonte_estrela.render(str(item),True,white) #cria o texto da estrela
         tela.blit(texto_estrela,pos_texto) #mostra o texto da estrela
     
-    pygame.draw.circle(tela, white, (x, y), 5) #circulo
+    pygame.draw.circle(tela, white, (x_y), 5) #circulo
     
     #mostra os F10,F11,F12
     texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,white)
