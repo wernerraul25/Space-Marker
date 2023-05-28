@@ -22,7 +22,7 @@ clock = pygame.time.Clock()
 tela = pygame.display.set_mode(tamanho)
 
 #fonte
-fonte_estrela = pygame.font.Font(None,25)
+fonte_estrela = pygame.font.Font(None,24)
 fonte = pygame.font.Font(None,30)
 
 #variáveis
@@ -45,6 +45,8 @@ while running:
                 item = simpledialog.askstring("Space", "Nome da Estrela:")
                 if item == "":
                     item = "Desconhecido" + str(x_y)
+                elif item is not None:
+                    item = item + str(x_y)
                 estrelas[item] = x_y
                 print(estrelas)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
