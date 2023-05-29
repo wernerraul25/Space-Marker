@@ -15,6 +15,11 @@ white = (255,255,255)
 fundo = pygame.image.load("fundo.jpg")
 icone = pygame.image.load("icone.png")
 
+#audio de fundo
+audio_fundo = pygame.mixer.Sound("audio_espaco.mp3")
+audio_fundo.play(-1) #fica em loop
+audio_fundo.set_volume(0.6) #volume mais baixo
+
 #nome e icone
 pygame.display.set_caption("Space Marker")
 pygame.display.set_icon(icone) #motivo desconhecido não aparece o icone
@@ -43,15 +48,15 @@ while running:
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             running = False
         elif event.type == pygame.MOUSEBUTTONUP and event.button == 1: #só funciona com botão esquerdo do mouse;)
-                x_y = pygame.mouse.get_pos()
-                item = simpledialog.askstring("Space", "Nome da Estrela:")
-                if item == "":
-                    item_tela = "Desconhecido" + str(x_y)
-                    item = "Desconhecido"
-                elif item is not None:
-                    item_tela = item  + str(x_y)
-                estrelas[item] = x_y
-                print(estrelas)
+                    x_y = pygame.mouse.get_pos()
+                    item = simpledialog.askstring("Space", "Nome da Estrela:")
+                    if item == "":
+                        item_tela = "Desconhecido" + str(x_y)
+                        item = "Desconhecido"
+                    elif item is not None:
+                        item_tela = item  + str(x_y)
+                    estrelas[item] = x_y
+                    print(estrelas)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
             running = False
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
@@ -60,7 +65,6 @@ while running:
             mostra_marcacao = False   #apaga da tela as marcações e limpa o dicionario
             estrelas = {}
             print(estrelas)
-
 
     #mostra na tela
     tela.blit(fundo, (0,0)) #fundo
