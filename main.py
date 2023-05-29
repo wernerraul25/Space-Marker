@@ -31,6 +31,7 @@ x_y = (0,0)
 pos_diminuir = 25
 item = None
 item_tela = None
+mostra_marcacao = True
 
 #dicionarios
 estrelas = {}
@@ -56,18 +57,19 @@ while running:
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
             running = False
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F12:
-            running = False
+            mostra_marcacao = False   #apaga da tela as marcações e limpa o dicionario
+            estrelas = {}
+            print(estrelas)
 
 
     #mostra na tela
     tela.blit(fundo, (0,0)) #fundo
     pos_texto = tuple(valor - pos_diminuir for valor in x_y) #posição do texto acima da estrela
     
-    if item is not None:
+    if mostra_marcacao: #se deletar o dicionario, apaga as marcações da tela
         texto_estrela = fonte_estrela.render(str(item_tela),True,white) #cria o texto da estrela
         tela.blit(texto_estrela,pos_texto) #mostra o texto da estrela
-    
-    pygame.draw.circle(tela, white, (x_y), 5) #circulo
+        pygame.draw.circle(tela, white, (x_y), 5) #circulo
     
     #mostra os F10,F11,F12
     texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,white)
