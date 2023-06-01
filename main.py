@@ -34,9 +34,10 @@ fonte = pygame.font.Font(None,30)
 running = True
 x_y = (0,0)
 pos_diminuir = 25
-item = None
-item_tela = None
+nome_estrela = None
+nome_estrela_tela = []
 mostra_marcacao = True
+posicoes = []
 
 #dicionarios
 estrelas = {}
@@ -49,14 +50,25 @@ while running:
             running = False
         elif event.type == pygame.MOUSEBUTTONUP and event.button == 1: #só funciona com botão esquerdo do mouse;)
                     x_y = pygame.mouse.get_pos()
-                    item = simpledialog.askstring("Space", "Nome da Estrela:")
-                    if item == "":
-                        item_tela = "Desconhecido" + str(x_y)
-                        item = "Desconhecido"
-                    elif item is not None:
-                        item_tela = item  + str(x_y)
-                    estrelas[item] = x_y
+                    nome_estrela = simpledialog.askstring("Space", "Nome da Estrela:")
+                    '''if nome_estrela == "":
+                        nome_estrela_tela = "Desconhecido" + str(x_y)
+                        nome_estrela = "Desconhecido"
+                    elif nome_estrela is not None:
+                        nome_estrela_tela = nome_estrela  + str(x_y)
+                    estrelas[nome_estrela] = x_y
+                    posicoes.append(x_y)
+                    print(posicoes)'''
+                    if nome_estrela == "":
+                         nome_estrela = "Desconhecido"
+                         posicoes.append(x_y)
+                         estrelas[nome_estrela] = posicoes[-1]
+                    elif nome_estrela is not None:
+                         posicoes.append(x_y)
+                         estrelas[nome_estrela] = posicoes[-1]
+                    nome_estrela_tela = nome_estrela + str(posicoes[-1])
                     print(estrelas)
+                         
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
             running = False
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
@@ -71,9 +83,13 @@ while running:
     pos_texto = tuple(valor - pos_diminuir for valor in x_y) #posição do texto acima da estrela
     
     if mostra_marcacao: #se deletar o dicionario, apaga as marcações da tela
-        texto_estrela = fonte_estrela.render(str(item_tela),True,white) #cria o texto da estrela
+        for estrela, posicao in estrelas.items():
+            texto_estrela = fonte.render(estrela, True, white)
+            tela.blit(texto_estrela, pos_texto)
+            pygame.draw.circle(tela, white, (x_y), 5) #circulo
+        '''texto_estrela = fonte_estrela.render(str(nome_estrela_tela),True,white) #cria o texto da estrela
         tela.blit(texto_estrela,pos_texto) #mostra o texto da estrela
-        pygame.draw.circle(tela, white, (x_y), 5) #circulo
+        pygame.draw.circle(tela, white, (x_y), 5) #circulo'''
     
     #mostra os F10,F11,F12
     texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,white)
