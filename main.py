@@ -4,7 +4,6 @@ import json #para criar o arquivo
 
 pygame.init()
 
-
 #tamanho tela
 largura = 1280
 altura = 720
@@ -37,18 +36,17 @@ x_y = (0,0)
 pos_diminuir = 25
 nome_estrela = None
 mostra_marcacao = True
-posicoes = []
+
 nomes = []
 
 #dicionarios
-estrelas = {}
+posicoes = {}
 
 #funções
 #função para salvar as posições em um arquivo json
 def salva_posicao():
      with open("posicoes.json","w") as file:
           json.dump(posicoes,file)
-     
 #função para carregar as posições em um arquivo json
 def carrega_posicao():
     global posicoes
@@ -57,12 +55,10 @@ def carrega_posicao():
             posicoes = json.load(file)
     except:
         with open("posicoes.json","w") as file:
-            json.dump(nomes,file)
-
+            json.dump(posicoes,file)
 #função para excluir todas as posições da tela
 def exclui_posicao():
-     global posicoes
-     posicoes = []
+     posicoes.clear()
 
 #função para salvar os nomes em um arquivo json
 def salva_nome():
@@ -91,29 +87,33 @@ while running:
                     nome_estrela = simpledialog.askstring("Space", "Nome da Estrela:")
                     if nome_estrela == "":
                         nome_estrela = "Desconhecido"
-                        nomes.append(nome_estrela)
-                    elif nome_estrela:
-                         nomes.append(nome_estrela)
-                    estrelas[nome_estrela] = x_y
-                    posicoes.append(x_y)
-                    print(nomes)
+                    elif nome_estrela: #vai que
+                         nome_estrela = nome_estrela
+                    elif nome_estrela is None:
+                         continue
+                    posicoes[nome_estrela] = x_y
                     print(posicoes)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
             salva_posicao()
-            salva_nome()
+            #salva_nome()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
             carrega_posicao()
-            carrega_nome()
+            #carrega_nome()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F12:
             exclui_posicao()   #apaga da tela as marcações e limpa o dicionario
-            exclui_nome()
+            #exclui_nome()
 
     #mostra na tela
     tela.blit(fundo, (0,0)) #fundo
     pos_texto = tuple(valor - pos_diminuir for valor in (x_y)) #posição do texto acima da estrela
 
-    for posicao in posicoes:
-         pygame.draw.circle(tela,white,posicao,5)
+    #ele pega a chave do dicionario, por isso o erro
+    '''for posicao in posicoes:
+         pygame.draw.circle(tela,white,(posicao),5)'''
+    
+    for chave in posicoes:
+        posicao = posicoes[chave]
+        pygame.draw.circle(tela,white,(posicao),5)
 
     #mostra os F10,F11,F12
     texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,white)
