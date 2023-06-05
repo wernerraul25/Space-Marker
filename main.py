@@ -37,8 +37,6 @@ pos_diminuir = 25
 nome_estrela = None
 mostra_marcacao = True
 
-nomes = []
-
 #dicionarios
 posicoes = {}
 
@@ -59,22 +57,6 @@ def carrega_posicao():
 #função para excluir todas as posições da tela
 def exclui_posicao():
      posicoes.clear()
-
-#função para salvar os nomes em um arquivo json
-def salva_nome():
-     with open("nomes.json","w") as file:
-          json.dump(nomes,file)
-     
-#função para carregar os nomes em um arquivo json
-def carrega_nome():
-     global nomes
-     with open("nomes.json","r") as file:
-          nomes = json.load(file)
-
-#função para excluir todos os nomes da tela
-def exclui_nome():
-     global nomes
-     nomes = []
 
 while running:
     for event in pygame.event.get():
@@ -108,11 +90,12 @@ while running:
     pos_texto = tuple(valor - pos_diminuir for valor in (x_y)) #posição do texto acima da estrela
 
     #ele pega a chave do dicionario, por isso o erro
-    '''for posicao in posicoes:
-         pygame.draw.circle(tela,white,(posicao),5)'''
+    #for chave in posicoes:
+        #print(chave)
     
+    #percorre as chaves(estrelas) do dicionário
     for chave in posicoes:
-        posicao = posicoes[chave]
+        posicao = posicoes[chave] #pega a posição de cada estrela(chave)
         pygame.draw.circle(tela,white,(posicao),5)
 
     #mostra os F10,F11,F12
