@@ -1,5 +1,6 @@
 import pygame
 from tkinter import simpledialog
+import json #para criar o arquivo
 
 pygame.init()
 
@@ -35,12 +36,49 @@ running = True
 x_y = (0,0)
 pos_diminuir = 25
 nome_estrela = None
-nome_estrela_tela = []
 mostra_marcacao = True
 posicoes = []
+nomes = []
 
 #dicionarios
 estrelas = {}
+
+#funções
+#função para salvar as posições em um arquivo json
+def salva_posicao():
+     with open("posicoes.json","w") as file:
+          json.dump(posicoes,file)
+     
+#função para carregar as posições em um arquivo json
+def carrega_posicao():
+    global posicoes
+    try:
+        with open("posicoes.json","r") as file:
+            posicoes = json.load(file)
+    except:
+        with open("posicoes.json","w") as file:
+            json.dump(nomes,file)
+
+#função para excluir todas as posições da tela
+def exclui_posicao():
+     global posicoes
+     posicoes = []
+
+#função para salvar os nomes em um arquivo json
+def salva_nome():
+     with open("nomes.json","w") as file:
+          json.dump(nomes,file)
+     
+#função para carregar os nomes em um arquivo json
+def carrega_nome():
+     global nomes
+     with open("nomes.json","r") as file:
+          nomes = json.load(file)
+
+#função para excluir todos os nomes da tela
+def exclui_nome():
+     global nomes
+     nomes = []
 
 while running:
     for event in pygame.event.get():
@@ -51,45 +89,30 @@ while running:
         elif event.type == pygame.MOUSEBUTTONUP and event.button == 1: #só funciona com botão esquerdo do mouse;)
                     x_y = pygame.mouse.get_pos()
                     nome_estrela = simpledialog.askstring("Space", "Nome da Estrela:")
-                    '''if nome_estrela == "":
-                        nome_estrela_tela = "Desconhecido" + str(x_y)
+                    if nome_estrela == "":
                         nome_estrela = "Desconhecido"
-                    elif nome_estrela is not None:
-                        nome_estrela_tela = nome_estrela  + str(x_y)
+                        nomes.append(nome_estrela)
+                    elif nome_estrela:
+                         nomes.append(nome_estrela)
                     estrelas[nome_estrela] = x_y
                     posicoes.append(x_y)
-                    print(posicoes)'''
-                    if nome_estrela == "":
-                         nome_estrela = "Desconhecido"
-                         posicoes.append(x_y)
-                         estrelas[nome_estrela] = posicoes[-1]
-                    elif nome_estrela is not None:
-                         posicoes.append(x_y)
-                         estrelas[nome_estrela] = posicoes[-1]
-                    nome_estrela_tela = nome_estrela + str(posicoes[-1])
-                    print(estrelas)
-                         
+                    print(nomes)
+                    print(posicoes)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
-            running = False
+            salva_posicao()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
-            running = False
+            carrega_posicao()
+            #carrega_nome()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F12:
-            mostra_marcacao = False   #apaga da tela as marcações e limpa o dicionario
-            estrelas = {}
-            print(estrelas)
+            exclui_posicao()   #apaga da tela as marcações e limpa o dicionario
+            exclui_nome()
 
     #mostra na tela
     tela.blit(fundo, (0,0)) #fundo
-    pos_texto = tuple(valor - pos_diminuir for valor in x_y) #posição do texto acima da estrela
-    
-    if mostra_marcacao: #se deletar o dicionario, apaga as marcações da tela
-        for estrela, posicao in estrelas.items():
-            texto_estrela = fonte.render(estrela, True, white)
-            tela.blit(texto_estrela, pos_texto)
-            pygame.draw.circle(tela, white, (x_y), 5) #circulo
-        '''texto_estrela = fonte_estrela.render(str(nome_estrela_tela),True,white) #cria o texto da estrela
-        tela.blit(texto_estrela,pos_texto) #mostra o texto da estrela
-        pygame.draw.circle(tela, white, (x_y), 5) #circulo'''
+    pos_texto = tuple(valor - pos_diminuir for valor in (x_y)) #posição do texto acima da estrela
+
+    for posicao in posicoes:
+         pygame.draw.circle(tela,white,posicao,5)
     
     #mostra os F10,F11,F12
     texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,white)
