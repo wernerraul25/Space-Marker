@@ -14,7 +14,7 @@ white = (255,255,255)
 
 #imagens
 fundo = pygame.image.load("fundo.jpg")
-icone = pygame.image.load("icone.png")
+icone = pygame.image.load("icone.png") #não aparece o icone
 
 #audio de fundo
 audio_fundo = pygame.mixer.Sound("audio_espaco.mp3")
@@ -100,9 +100,10 @@ while running:
                     print(posicoes)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
             salva_posicao()
+            salva_nome()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F11:
             carrega_posicao()
-            #carrega_nome()
+            carrega_nome()
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F12:
             exclui_posicao()   #apaga da tela as marcações e limpa o dicionario
             exclui_nome()
@@ -113,7 +114,7 @@ while running:
 
     for posicao in posicoes:
          pygame.draw.circle(tela,white,posicao,5)
-    
+
     #mostra os F10,F11,F12
     texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,white)
     texto_f11 = fonte.render("Pressione F11 para carregar as marcações salvas",True,white)
