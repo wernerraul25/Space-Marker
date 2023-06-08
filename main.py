@@ -13,7 +13,8 @@ white = (255,255,255)
 
 #imagens
 fundo = pygame.image.load("fundo.jpg")
-icone = pygame.image.load("icone.png") #não aparece o icone
+icone = pygame.image.load("icone.png")
+icone = pygame.image.load("icone.png") #EU NÃO FAÇO IDEIA O POR QUÊ, MAS ASSIM APARECE O ICONE AUHSAUHSUASHS
 
 #audio de fundo
 audio_fundo = pygame.mixer.Sound("audio_espaco.mp3")
@@ -21,10 +22,10 @@ audio_fundo.play(-1) #fica em loop
 audio_fundo.set_volume(0.6) #volume mais baixo
 
 #nome e icone
-pygame.display.set_caption("Space Marker")
-pygame.display.set_icon(icone) #motivo desconhecido não aparece o icone
 clock = pygame.time.Clock()
 tela = pygame.display.set_mode(tamanho)
+pygame.display.set_caption("Space Marker")
+pygame.display.set_icon(icone)
 
 #fonte
 fonte_estrela = pygame.font.Font(None,24)
