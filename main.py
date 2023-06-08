@@ -19,7 +19,7 @@ icone = pygame.image.load("icone.png") #EU NÃO FAÇO IDEIA O POR QUÊ, MAS ASSI
 #audio de fundo
 audio_fundo = pygame.mixer.Sound("audio_espaco.mp3")
 audio_fundo.play(-1) #fica em loop
-audio_fundo.set_volume(0.6) #volume mais baixo
+audio_fundo.set_volume(0.2) #volume mais baixo
 
 #nome e icone
 clock = pygame.time.Clock()
