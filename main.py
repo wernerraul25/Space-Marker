@@ -99,8 +99,7 @@ while running:
 
     #linhas entre as estrelas    
     if len(estrelas) > 2:
-        pygame.draw.line(tela, white, estrelas(-2), estrelas(-1), 1)
-    
+        pygame.draw.line(tela, white, (estrelas),5)
          
 
     #mostra os F10,F11,F12
