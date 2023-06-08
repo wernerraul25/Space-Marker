@@ -97,6 +97,12 @@ while running:
         nome_estrela = fonte_estrela.render(chave + str(posicao),True,white)
         tela.blit(nome_estrela,(posicao))
 
+    #linhas entre as estrelas    
+    if len(estrelas) > 2:
+        pygame.draw.line(tela, white, estrelas(-2), estrelas(-1), 1)
+    
+         
+
     #mostra os F10,F11,F12
     texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,white)
     texto_f11 = fonte.render("Pressione F11 para carregar as marcações salvas",True,white)
