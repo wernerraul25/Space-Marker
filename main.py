@@ -37,6 +37,7 @@ posicao = (0,0)
 nome = None
 mostra_marcacao = True
 contador = 0
+contador2 = 0
 
 #dicionarios
 estrelas = {}
@@ -75,11 +76,15 @@ while running:
                 if "Desconhecido" in estrelas: #salva desconhecidos infinitos no dicionario, com o número de cada desconhecido do lado
                     contador = contador + 1
                     nome = "Desconhecido" + str(contador)
+            elif nome in estrelas:
+                contador2 = contador2 + 1
+                nome = nome + str(contador2)
             elif nome: #vai que
                     nome = nome
             elif nome is None:
                     continue
             estrelas[nome]= posicao
+            print(contador2)
             print(estrelas)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
             salva_posicao()
@@ -102,6 +107,7 @@ while running:
     #obter as chaves do dicionario
     chaves = list(estrelas.keys())
 
+    #printa a linha
     for i in range(len(chaves)-1):
          chave_atual = chaves[i]
          chave_proximo = chaves[i + 1]
