@@ -36,10 +36,10 @@ running = True
 posicao = (0,0)
 nome = None
 mostra_marcacao = True
+contador = 0
 
 #dicionarios
 estrelas = {}
-nomes = []
 
 #funções
 #função para salvar as posições em um arquivo json
@@ -72,11 +72,13 @@ while running:
             nome = simpledialog.askstring("Space", "Nome da Estrela:")
             if nome == "":
                 nome = "Desconhecido"
+                if "Desconhecido" in estrelas: #salva desconhecidos infinitos no dicionario, com o número de cada desconhecido do lado
+                    contador = contador + 1
+                    nome = "Desconhecido" + str(contador)
             elif nome: #vai que
                     nome = nome
             elif nome is None:
                     continue
-            nomes.append(nome)
             estrelas[nome]= posicao
             print(estrelas)
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F10:
@@ -97,11 +99,16 @@ while running:
         nome_estrela = fonte_estrela.render(chave + str(posicao),True,white)
         tela.blit(nome_estrela,(posicao))
 
-    #linhas entre as estrelas    
-    if len(estrelas) > 2:
-        pygame.draw.line(tela, white, (estrelas),5)
-         
+    #obter as chaves do dicionario
+    chaves = list(estrelas.keys())
 
+    for i in range(len(chaves)-1):
+         chave_atual = chaves[i]
+         chave_proximo = chaves[i + 1]
+         ponto_atual = estrelas[chave_atual]
+         proximo_ponto = estrelas[chave_proximo]
+         pygame.draw.line(tela,white,ponto_atual,proximo_ponto)
+    
     #mostra os F10,F11,F12
     texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,white)
     texto_f11 = fonte.render("Pressione F11 para carregar as marcações salvas",True,white)
