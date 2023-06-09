@@ -1,5 +1,7 @@
 # Space Marker
- Trabalho do Marcão G2
+Projeto desenvolvido em Python 3, utilizando bibilotecas Pygame, Json, e Tkinter. Projeto feito para disciplina de Pensamento Computacional com o Prof. Marcos Roberto dos Santos.
+
+## 
 
 Aluno: Raul Werner
 RA: 1129436
