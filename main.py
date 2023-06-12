@@ -8,8 +8,8 @@ pygame.init()
 largura = 1280
 altura = 720
 tamanho = (largura,altura)
-black = (0,0,0)
-white = (255,255,255)
+preto = (0,0,0)
+branco = (255,255,255)
 
 #imagens
 fundo = pygame.image.load("fundo.jpg")
@@ -35,7 +35,6 @@ fonte = pygame.font.Font(None,28)
 running = True
 posicao = (0,0)
 nome = None
-mostra_marcacao = True
 contador = 0
 contador2 = 0
 
@@ -76,13 +75,13 @@ while running:
                 if "Desconhecido" in estrelas: #salva desconhecidos infinitos no dicionario, com o número de cada desconhecido do lado
                     contador = contador + 1
                     nome = "Desconhecido" + str(contador)
-            elif nome in estrelas:
+            elif nome in estrelas: #salva nomes com o número do lado, em caso de já ter o nome
                 contador2 = contador2 + 1
                 nome = nome + str(contador2)
-            elif nome: #vai que
-                    nome = nome
-            elif nome is None:
+            elif nome is None: #se clicar no x ou cancel, na hora de pôr nome, ai continua normal
                     continue
+            else:
+                 nome = nome
             estrelas[nome]= posicao
             print(contador2)
             print(estrelas)
@@ -93,15 +92,14 @@ while running:
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_F12:
             exclui_posicao()   #apaga da tela as marcações e limpa o dicionario
 
-    #mostra na tela
+    #mostra a tela
     tela.blit(fundo, (0,0)) #fundo
-    #pos_texto = tuple(valor - pos_diminuir for valor in (posicao)) #posição do texto acima da estrela
 
     #percorre as chaves(estrelas) do dicionário
     for chave in estrelas:
         posicao = estrelas[chave]
-        pygame.draw.circle(tela,white,(posicao),5)
-        nome_estrela = fonte_estrela.render(chave + str(posicao),True,white)
+        pygame.draw.circle(tela,branco,(posicao),5)
+        nome_estrela = fonte_estrela.render(chave + str(posicao),True,branco)
         tela.blit(nome_estrela,(posicao))
 
     #obter as chaves do dicionario
@@ -113,12 +111,12 @@ while running:
          chave_proximo = chaves[i + 1]
          ponto_atual = estrelas[chave_atual]
          proximo_ponto = estrelas[chave_proximo]
-         pygame.draw.line(tela,white,ponto_atual,proximo_ponto)
+         pygame.draw.line(tela,branco,ponto_atual,proximo_ponto)
     
     #mostra os F10,F11,F12
-    texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,white)
-    texto_f11 = fonte.render("Pressione F11 para carregar as marcações salvas",True,white)
-    texto_f12 = fonte.render("Pressione F12 para deletar as marcações",True,white)
+    texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,branco)
+    texto_f11 = fonte.render("Pressione F11 para carregar as marcações salvas",True,branco)
+    texto_f12 = fonte.render("Pressione F12 para deletar as marcações",True,branco)
     tela.blit(texto_f10,(10,10))
     tela.blit(texto_f11,(10,35))
     tela.blit(texto_f12,(10,60))
