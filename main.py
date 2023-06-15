@@ -1,6 +1,7 @@
 import pygame
 from tkinter import simpledialog
 import json #para criar o arquivo
+import math
 
 pygame.init()
 
@@ -112,7 +113,11 @@ while running:
          ponto_atual = estrelas[chave_atual]
          proximo_ponto = estrelas[chave_proximo]
          pygame.draw.line(tela,branco,ponto_atual,proximo_ponto)
-    
+
+         distancia = math.dist(ponto_atual, proximo_ponto) #para calcular a distancia entre os pontos 
+         texto_distancia = fonte.render(f"Distância: {distancia:2f} Anos-Luz",True, branco)
+         tela.blit(texto_distancia, (ponto_atual[0], ponto_atual[1] - 20))
+
     #mostra os F10,F11,F12
     texto_f10 = fonte.render("Pressione F10 para salvar as marcações",True,branco)
     texto_f11 = fonte.render("Pressione F11 para carregar as marcações salvas",True,branco)
