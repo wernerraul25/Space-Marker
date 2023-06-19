@@ -1,7 +1,7 @@
 import pygame
 from tkinter import simpledialog
 import json #para criar o arquivo
-import math
+import math #para calcular a distância
 
 pygame.init()
 
