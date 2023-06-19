@@ -81,8 +81,6 @@ while running:
                 nome = nome + str(contador2)
             elif nome is None: #se clicar no x ou cancel, na hora de pôr nome, ai continua normal
                     continue
-            else:
-                 nome = nome
             estrelas[nome]= posicao
             print(contador2)
             print(estrelas)
@@ -115,7 +113,7 @@ while running:
          pygame.draw.line(tela,branco,ponto_atual,proximo_ponto)
 
          distancia = math.dist(ponto_atual, proximo_ponto) #para calcular a distancia entre os pontos 
-         texto_distancia = fonte.render(f"Distância: {distancia:2f} Anos-Luz",True, branco)
+         texto_distancia = fonte_estrela.render(f"Distância: {distancia:2f} Anos-Luz",True, branco)
          tela.blit(texto_distancia, (ponto_atual[0], ponto_atual[1] - 20))
 
     #mostra os F10,F11,F12
